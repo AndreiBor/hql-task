@@ -3,6 +3,7 @@ package by.itacademy.hibernate.entity;
 
 import lombok.*;
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -18,6 +19,7 @@ import java.util.Set;
 @Entity
 @Table(name = "company")
 //@BatchSize(size = 3)
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

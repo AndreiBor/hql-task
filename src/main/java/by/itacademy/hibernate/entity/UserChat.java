@@ -15,7 +15,7 @@ import java.time.Instant;
 @Builder
 @Entity
 @Table(name = "users_chat", schema = "public")
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "Users")
 public class UserChat extends AuditableEntity<Long> {
 
     @Id

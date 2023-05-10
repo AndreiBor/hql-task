@@ -19,7 +19,7 @@ import java.util.Set;
 @Entity
 @Table(name = "company")
 //@BatchSize(size = 3)
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "Users")
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -20,7 +20,7 @@ import java.util.Set;
 @Table(name = "company")
 //@BatchSize(size = 3)
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "Users")
-public class Company {
+public class Company  implements BaseEntity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

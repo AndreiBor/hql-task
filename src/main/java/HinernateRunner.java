@@ -3,7 +3,9 @@ import by.itacademy.hibernate.dao.PaymentRepository;
 import by.itacademy.hibernate.dao.UserRepository;
 import by.itacademy.hibernate.dto.UserCreateDto;
 import by.itacademy.hibernate.entity.*;
+import by.itacademy.hibernate.mapper.CompanyReadMapper;
 import by.itacademy.hibernate.mapper.UserCreateMapper;
+import by.itacademy.hibernate.mapper.UserReadMapper;
 import by.itacademy.hibernate.service.UserService;
 import by.itacademy.hibernate.util.HibernateUtil;
 import org.hibernate.Session;
@@ -26,22 +28,24 @@ public class HinernateRunner {
 
             var companyRepository = new CompanyRepository(session);
             var userCreateMapper = new UserCreateMapper(companyRepository);
+            var companyReadMapper = new CompanyReadMapper();
+            var userReadMapper = new UserReadMapper(companyReadMapper);
             var userRepository = new UserRepository(session);
-            var userService = new UserService(userRepository, userCreateMapper);
+            var userService = new UserService(userRepository, userCreateMapper, userReadMapper);
 
             UserCreateDto userCreateDto = new UserCreateDto(
               PersonalInfo.builder()
                       .firstname("Anna")
                       .lastname("Ivanovskaya")
-                      .birthDate(new Birthday(LocalDate.now()))
+//                      .birthDate(new Birthday(LocalDate.now()))
                       .build(),
-                    "anna10@gmail.com",
+                    "anna13@gmail.com",
                     Role.USER,
                     1
             );
 
             System.out.println(userService.create(userCreateDto));
-
+            System.out.println(userService.findUserById(15L));
             session.getTransaction().commit();
         }
     }

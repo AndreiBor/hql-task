@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -26,5 +27,6 @@ public class PersonalInfo implements Serializable {
     private String lastname;
     @Convert(converter = BirthdayConvertor.class)
     @Column(name = "birth_date")
+    @NotNull
     private Birthday birthDate;
 }

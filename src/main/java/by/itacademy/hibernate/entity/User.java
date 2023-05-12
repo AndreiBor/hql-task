@@ -1,6 +1,8 @@
 package by.itacademy.hibernate.entity;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+
 import lombok.*;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.CacheConcurrencyStrategy;

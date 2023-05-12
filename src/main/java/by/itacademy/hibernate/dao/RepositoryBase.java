@@ -19,14 +19,14 @@ public abstract class RepositoryBase<K extends Serializable, E extends BaseEntit
 
     @Override
     public E save(E entity) {
-        @Cleanup var session = sessionFactory.openSession();
+        var session = sessionFactory.getCurrentSession();
         session.save(entity);
         return entity;
     }
 
     @Override
     public void delete(K id) {
-        @Cleanup var session = sessionFactory.openSession();
+        var session = sessionFactory.getCurrentSession();
         session.delete(session.find(clazz, id));
         //findById(id).ifPresent(session::delete);
         session.flush();
@@ -34,19 +34,19 @@ public abstract class RepositoryBase<K extends Serializable, E extends BaseEntit
 
     @Override
     public void update(E entity) {
-        @Cleanup var session = sessionFactory.openSession();
+        var session = sessionFactory.getCurrentSession();
         session.merge(entity);
     }
 
     @Override
     public Optional<E> findById(K id) {
-        @Cleanup var session = sessionFactory.openSession();
+        var session = sessionFactory.getCurrentSession();
         return Optional.ofNullable(session.find(clazz, id));
     }
 
     @Override
     public List<E> findAll() {
-        @Cleanup var session = sessionFactory.openSession();
+        var session = sessionFactory.getCurrentSession();
         var criteria = session.getCriteriaBuilder().createQuery(clazz);
         criteria.from(clazz);
         return session.createQuery(criteria).getResultList();

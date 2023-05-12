@@ -14,7 +14,7 @@ public class HinernateRunner {
              Session session = sessionFactory.getCurrentSession()) {
             session.beginTransaction();
 
-            var paymentRepository = new PaymentRepository(sessionFactory);
+            var paymentRepository = new PaymentRepository(session);
             var payment = paymentRepository.findById(1L).get();
             System.out.println(payment);
 

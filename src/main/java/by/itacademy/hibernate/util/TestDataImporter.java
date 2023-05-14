@@ -1,4 +1,4 @@
-package by.itacademy.hibernate.utils;
+package by.itacademy.hibernate.util;
 
 
 import by.itacademy.hibernate.entity.*;

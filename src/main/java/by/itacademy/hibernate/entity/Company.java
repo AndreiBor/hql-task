@@ -2,6 +2,7 @@ package by.itacademy.hibernate.entity;
 
 
 import lombok.*;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.util.HashSet;

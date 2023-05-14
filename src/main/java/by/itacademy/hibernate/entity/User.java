@@ -2,10 +2,27 @@ package by.itacademy.hibernate.entity;
 
 import javax.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.FetchProfile;
+
 import java.util.ArrayList;
 import java.util.List;
 
-
+@NamedEntityGraph(
+        name = "WithCompanyAndChat",
+        attributeNodes = {
+                @NamedAttributeNode("company"),
+                @NamedAttributeNode(value = "userChats", subgraph = "chats")
+        },
+        subgraphs = {
+                @NamedSubgraph(name = "chats", attributeNodes = @NamedAttributeNode("chat"))
+        }
+)
+@FetchProfile(name = "withCompany", fetchOverrides = {
+        @FetchProfile.FetchOverride(entity = User.class, association = "company", mode = FetchMode.JOIN),
+        @FetchProfile.FetchOverride(entity = User.class, association = "payments", mode = FetchMode.JOIN)
+})
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,19 +50,19 @@ public class User implements Comparable<User>, BaseEntity<Long> {
     @JoinColumn(name = "company_id")
     private Company company;
 
-    @OneToOne(
-            mappedBy = "user",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    private Profile profile;
+//    @OneToOne(
+//            mappedBy = "user",
+//            cascade = CascadeType.ALL,
+//            fetch = FetchType.LAZY
+//    )
+//    private Profile profile;
 
     @Builder.Default
     @OneToMany(mappedBy = "user")
     private List<UserChat> userChats = new ArrayList<>();
 
     @Builder.Default
-    @OneToMany(mappedBy = "receiver")
+    @OneToMany(mappedBy = "receiver", fetch = FetchType.LAZY)
     private List<Payment> payments = new ArrayList<>();
 
     @Override

@@ -1,15 +1,13 @@
 package by.javaguru.hibernate.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+//@ToString(exclude = "receiver")
 @Builder
 @Entity
 public class Payment implements BaseEntity<Long> {

@@ -1,6 +1,8 @@
 package by.javaguru.hibernate.entity;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+
 import lombok.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.FetchMode;
